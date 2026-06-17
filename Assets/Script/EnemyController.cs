@@ -19,10 +19,10 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, Player.position);
-
+        Vector2 direction = Vector2.zero;
         if (distanceToPlayer < detectionRadius)
         {
-            Vector2 direction = (Player.position - transform.position).normalized;
+             direction = (Player.position - transform.position).normalized;
            
             movement = new Vector2(direction.x, 0);
 
@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
         {
             movement = Vector2.zero;
         }
-        rb.MovePosition(rb.position + movement * speed * Time.deltaTime);
+        rb.linearVelocity = direction * speed  ;
     }
 
 }
